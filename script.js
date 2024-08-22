@@ -1,16 +1,33 @@
 let counter = 0;
 
-document.querySelector(".decrease").addEventListener("click", function() {
-    counter--;
-    document.getElementById("value").textContent = counter;
-});
+const value = document.querySelector("#value");
+const btns = document.querySelectorAll(".btn");
 
-document.querySelector(".reset").addEventListener("click", function() {
-    counter = 0;
-    document.getElementById("value").textContent = counter;
-});
+btns.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+        const styles = e.currentTarget.classList;
+        
+        if (styles.contains("decrease")) {
+            counter--;
+        }
+        else if (styles.contains("increase")) {
+            counter++;
+        }
+        else {
+            counter = 0;
+        }
 
-document.querySelector(".increase").addEventListener("click", function() {
-    counter++;
-    document.getElementById("value").textContent = counter;
+        if (counter > 0) {
+            value.style.color = "green";
+        }
+        if (counter < 0) {
+            value.style.color = "red";
+        }
+        if (counter === 0) {
+            value.style.color = "#222";
+        }
+        
+        value.textContent = counter;
+        
+    });
 });
